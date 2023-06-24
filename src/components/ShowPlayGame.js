@@ -6,6 +6,8 @@ import withReactContent from "sweetalert2-react-content";
 import { show_alerta } from "../functions";
 import { useAuth0 } from '@auth0/auth0-react';
 
+import Buscador from "./Buscador";
+
 
 const ShowPlayGame = () => { //Actualizar el token
 
@@ -27,11 +29,14 @@ const ShowPlayGame = () => { //Actualizar el token
 
   const { getIdTokenClaims } = useAuth0(); // Extraer la función getIdTokenClaims de useAuth0
 
+  
 
   useEffect(() => {
     getVideojuegos();
   }, []);
-
+ 
+  
+  
   const getVideojuegos = async () => {
     try {
       const tokenGlobal = await obtenerInformacion(); // Obtener el tokenGlobal
@@ -226,20 +231,17 @@ const ShowPlayGame = () => { //Actualizar el token
         <div className="row mt-3">
           <div className="col-md-4 offset-4">
             <div className="d-grid mx-auto">
-              <button
-                onClick={() => openModal(1)}
-                className="btn btn-primary"
+            <button onClick={() => openModal(1)}
                 data-bs-toggle="modal"
-                data-bs-target="#modalVideojuegos"
-              >
-                <i className="fa-solid fa-circle-plus"></i> Añadir
+                data-bs-target="#modalVideojuegos" class="buttonadd">
+                + Añadir Videojuego
               </button>
             </div>
           </div>
         </div>
         <div className="row mt-3">
           <div className="col-12 col-lg-8 offset-0 offset-lg-2">
-            <table className="table table-hover">
+            <table className="table striped bordered">
               <thead>
                 <tr>
                   <th>#</th>
@@ -262,7 +264,7 @@ const ShowPlayGame = () => { //Actualizar el token
                     <td>{videojuego.distribuidor}</td>
                     <td>{videojuego.plataforma}</td>
                     <td>{videojuego.genero}</td>
-                    <td className='col-2'>
+                    <td className='row-mt-3 col-2'>
                       <button onClick={() => openModal(2,
                         videojuego.id,
                         videojuego.nombre,
